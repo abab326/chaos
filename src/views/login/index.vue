@@ -11,7 +11,7 @@
           <span class="m-l-2 text-gray-400">混沌世界</span>
         </div>
         <el-input v-model="username" class="username" placeholder="用户名" />
-        <el-input v-model="password" placeholder="密码" type="password " />
+        <el-input v-model="password" placeholder="密码" type="password" />
         <el-button type="primary" @click="submitLogin">登录</el-button>
       </el-space>
     </div>

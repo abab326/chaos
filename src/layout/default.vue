@@ -1,6 +1,6 @@
 <template>
   <el-container class="h-full" direction="vertical">
-    <el-header class="shadow-md">
+    <el-header class="shadow-md" height="48px">
       <Head />
     </el-header>
 
@@ -10,8 +10,12 @@
           <LeftMenu />
         </el-scrollbar>
       </el-aside>
+
       <el-main>
-        <RouterView />
+        <nav-tab />
+        <div class="flex-1">
+          <RouterView />
+        </div>
       </el-main>
     </el-container>
   </el-container>
@@ -20,6 +24,7 @@
 <script setup lang="ts">
 import Head from './components/Head.vue'
 import LeftMenu from './components/LeftMenu.vue'
+import NavTab from './components/NavTab.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -29,6 +34,9 @@ import LeftMenu from './components/LeftMenu.vue'
 }
 
 .el-main {
-  --el-main-padding: 8px;
+  --el-main-padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 </style>

@@ -12,8 +12,6 @@ export const useUserStore = defineStore(
     const isLogin = computed(() => !!token.value)
 
     watch(token, (val) => {
-      console.log('token change', val)
-      console.log('token change', _user.value)
       if (val && !_user.value) {
         getUserInfo()
       }
@@ -43,10 +41,12 @@ export const useUserStore = defineStore(
      * @returns 无返回值
      */
     const userLogout = async () => {
-      const [error, res] = await logout()
-      if (!error && res?.data) {
-        token.value = ''
+      const [error] = await logout()
+      console.log('error', error)
+      if (!error) {
+        token.value = undefined
         _user.value = undefined
+        localStorage.removeItem('token')
         return true
       }
     }

@@ -24,15 +24,17 @@
 </template>
 <script lang="ts" setup>
 import { computed } from 'vue'
-const props = defineProps({
-  // SVG 图标名称或在线URL
-  icon: { type: String, required: true },
-  // SVG 图标大小
-  size: { type: [Number, String], default: 24 },
-  // SVG 图标颜色
-  color: { type: String, default: 'red' },
-  // 图标类名
-  className: { type: String, default: '' },
+
+export interface SvgIconProps {
+  icon: string
+  size?: number | string
+  color?: string
+  className?: string
+}
+
+const props = withDefaults(defineProps<SvgIconProps>(), {
+  size: 16,
+  color: 'currentColor',
 })
 const isOnlineSvg = computed(() => /^(https?:)/.test(props.icon))
 </script>

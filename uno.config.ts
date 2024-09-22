@@ -31,7 +31,6 @@ export default defineConfig({
       fill: 'var(--el-fill-color)',
       // ...
     },
-    spacing: {},
   },
   shortcuts: [
     { 'base-border': 'border border-solid' },
