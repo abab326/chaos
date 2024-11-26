@@ -1,8 +1,7 @@
 <template>
-  <div class="text-container relative flex flex-col h-full">
+  <div class="flex flex-col h-full w-full">
     <cus-form :form-data="formData" />
-
-    <div class="w-20 bg-amber aspect-video mt-2"></div>
+    <cus-table />
   </div>
 </template>
 
@@ -10,8 +9,4 @@
 const formData = reactive({})
 </script>
 
-<style lang="scss" scoped>
-.text-container {
-  color: var(--el-color-primary);
-}
-</style>
+<style lang="scss" scoped></style>

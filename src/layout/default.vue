@@ -13,7 +13,7 @@
 
       <el-main>
         <nav-tab />
-        <div class="flex-1">
+        <div class="relative flex-1">
           <RouterView />
         </div>
       </el-main>

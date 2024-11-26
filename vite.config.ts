@@ -26,9 +26,9 @@ export default defineConfig({
     }),
     Components({
       globs: ['./src/components/**/*.vue', './src/components/*.vue'],
-      resolvers: [
-        ElementPlusResolver({ importStyle: 'sass', version: '2.8.1' }),
-      ],
+      // resolvers: [
+      //   ElementPlusResolver({ importStyle: 'sass', version: '2.8.1' }),
+      // ],
     }),
     createSvgIconsPlugin({
       iconDirs: [path.resolve(__dirname, 'src/assets/icons')],

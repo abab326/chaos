@@ -1,7 +1,25 @@
+export type FormItemComponentType =
+  | 'input'
+  | 'select'
+  | 'checkbox'
+  | 'checkbox-group'
+  | 'radio-group'
+  | 'radio'
+  | 'switch'
+  | 'date-picker'
+  | 'time-picker'
+  | 'cascader'
+  | 'upload'
+
 export interface CusFormItemProps {
   prop: string
   label: string
-  type: 'text' | 'select' | 'textarea' | 'checkbox'
+  type: FormItemComponentType
+  rules?: any
+  componentProps?: Record<string, any>
+  componentAttrs?: Record<string, any>
+  componentEvents?: Record<string, any>
+  componentSlots?: Record<string, any>
 }
 
 export interface CusFormProps {

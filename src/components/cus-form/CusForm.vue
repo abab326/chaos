@@ -3,29 +3,13 @@
     class="cus-form"
     ref="formRef"
     :model="formData"
-    :rules="rules"
     label-width="80px"
     @validate="handleValidate"
   >
     <div grid gap-2 :class="gridCols">
       <div v-for="(item, index) in colProps" :key="index" class="col-span-3">
-        <el-form-item v-if="index !== 1" :label="item.label" :prop="item.prop">
-          <el-input
-            v-if="item.type === 'text'"
-            v-model="formData[item.prop]"
-            placeholder="请输入姓名"
-            clearable
-          />
-        </el-form-item>
-        <el-form-item
-          v-if="item.type === 'checkbox'"
-          :label="item.label"
-          :prop="item.prop"
-        >
-          <el-checkbox-group v-model="formData[item.prop]">
-            <el-checkbox :value="1" />
-            <el-checkbox :value="2" />
-          </el-checkbox-group>
+        <el-form-item :label="item.label" :prop="item.prop">
+          <CusFormItem :formItemOption="item" />
         </el-form-item>
       </div>
     </div>
@@ -33,7 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import type { FormInstance, FormItemProp, FormRules } from 'element-plus'
+import type { FormInstance, FormItemProp } from 'element-plus'
+import CusFormItem from './CusFormItem.vue'
 import { CusFormProps } from './type'
 const formRef = ref<FormInstance>()
 
@@ -41,8 +26,71 @@ const props = withDefaults(defineProps<CusFormProps>(), {
   cols: 12,
   formData: {},
   colProps: () => [
-    { label: '姓名', prop: 'name', type: 'text' },
-    { label: '是否', prop: 'checked', type: 'checkbox' },
+    {
+      label: '姓名',
+      prop: 'name',
+      type: 'input',
+      componentProps: {
+        placeholder: '请输入',
+        clearable: true,
+      },
+    },
+    {
+      label: '是否',
+      prop: 'checked',
+      type: 'radio-group',
+      componentSlots: {
+        default: [
+          { type: 'radio', label: '选项1', value: 1 },
+          { type: 'radio', label: '选项2', value: 2 },
+        ],
+      },
+    },
+    {
+      label: '是否',
+      prop: 'checked',
+      type: 'checkbox-group',
+
+      componentSlots: {
+        default: [
+          {
+            type: 'checkbox',
+            label: '选项1',
+            value: 1,
+          },
+          {
+            type: 'checkbox',
+            label: '选项2',
+            value: 2,
+          },
+          {
+            type: 'checkbox',
+            label: '选项2',
+            value: 3,
+          },
+          {
+            type: 'checkbox',
+            label: '选项2',
+            value: 4,
+          },
+        ],
+      },
+    },
+
+    {
+      label: '下拉选择',
+      prop: 'select',
+      type: 'select',
+      componentSlots: {
+        default: [
+          { type: 'option', label: '选项1', value: 1 },
+          { type: 'option', label: '选项2', value: 2 },
+          { type: 'option', label: '选项2', value: 3 },
+          { type: 'option', label: '选项2', value: 4 },
+          { type: 'option', label: '选项2', value: 5 },
+        ],
+      },
+    },
   ],
 })
 
@@ -60,25 +108,11 @@ const gridCols = computed(() => {
     10: 'grid-cols-10',
     11: 'grid-cols-11',
     12: 'grid-cols-12',
+    24: 'grid-cols-24',
   }
 
   return colsMap[props.cols]
 })
-
-const rules = reactive<FormRules>({
-  name: [
-    { required: true, message: 'Please input Activity name', trigger: 'blur' },
-    { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' },
-  ],
-  checked: [
-    {
-      required: true,
-      message: 'Please select',
-      trigger: 'change',
-    },
-  ],
-})
-
 const handleValidate = (prop: FormItemProp) => {
   console.log('222', prop, props.formData)
 }
@@ -86,11 +120,9 @@ const handleValidate = (prop: FormItemProp) => {
 
 <style lang="scss" scoped>
 .cus-form {
+  padding: 0.75rem 1rem 0;
   :deep(.el-form-item) {
-    margin-bottom: 1rem;
-  }
-  .el-checkbox {
-    margin-right: 0.75rem;
+    margin-bottom: 0.75rem;
   }
 }
 </style>

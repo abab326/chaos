@@ -81,6 +81,7 @@
     "setMapStoreSuffix": true,
     "storeToRefs": true,
     "ElMessage": true,
-    "ElMessageBox": true
+    "ElMessageBox": true,
+    "ElInput": true
   }
 }

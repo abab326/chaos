@@ -2,7 +2,7 @@ import * as ECharts from 'echarts'
 
 const useECharts = (
   chartRef: Ref<HTMLElement | undefined>,
-  options: Ref<Record<string, any>>,
+  options: Ref<Record<string, any>>
 ) => {
   const chartInstance = ref<ECharts.ECharts>()
 
