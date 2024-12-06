@@ -1,5 +1,5 @@
 <template>
-  <div h-full flex items-center gap-2>
+  <div class="h-full flex items-center gap-2">
     <el-image w-full h-8 :src="url" fit="fill" />
     <div flex-1></div>
     <div flex gap-1>

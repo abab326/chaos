@@ -1,13 +1,11 @@
 <template>
-  <el-form
-    class="cus-form"
-    ref="formRef"
-    :model="formData"
-    label-width="80px"
-    @validate="handleValidate"
-  >
-    <div grid gap-2 :class="gridCols">
-      <div v-for="(item, index) in colProps" :key="index" class="col-span-3">
+  <el-form class="cus-form" ref="formRef" :model="formData" label-width="80px">
+    <div grid gap-2 class="grid-cols-24">
+      <div
+        v-for="(item, index) in colProps"
+        :key="index"
+        :class="gridItemSpan(item.span)"
+      >
         <el-form-item :label="item.label" :prop="item.prop">
           <CusFormItem :formItemOption="item" />
         </el-form-item>
@@ -17,14 +15,15 @@
 </template>
 
 <script setup lang="ts">
-import type { FormInstance, FormItemProp } from 'element-plus'
+import type { FormInstance } from 'element-plus'
 import CusFormItem from './CusFormItem.vue'
 import { CusFormProps } from './type'
 const formRef = ref<FormInstance>()
 
 const props = withDefaults(defineProps<CusFormProps>(), {
-  cols: 12,
+  colSpan: 6,
   formData: {},
+
   colProps: () => [
     {
       label: '姓名',
@@ -76,11 +75,17 @@ const props = withDefaults(defineProps<CusFormProps>(), {
         ],
       },
     },
-
     {
       label: '下拉选择',
       prop: 'select',
       type: 'select',
+      span: 6,
+      componentProps: {
+        placeholder: '请选择',
+        clearable: true,
+        multiple: true,
+        filterable: true,
+      },
       componentSlots: {
         default: [
           { type: 'option', label: '选项1', value: 1 },
@@ -91,31 +96,34 @@ const props = withDefaults(defineProps<CusFormProps>(), {
         ],
       },
     },
+    {
+      label: '日期',
+      prop: 'date',
+      type: 'date-picker',
+      componentProps: {
+        'placeholder': '请选择',
+        'type': 'month',
+        'clearable': true,
+        'value-format': 'yyyy-MM',
+      },
+    },
   ],
 })
 
-const gridCols = computed(() => {
-  const colsMap: Record<number, string> = {
-    1: 'grid-cols-1',
-    2: 'grid-cols-2',
-    3: 'grid-cols-3',
-    4: 'grid-cols-4',
-    5: 'grid-cols-5',
-    6: 'grid-cols-6',
-    7: 'grid-cols-7',
-    8: 'grid-cols-8',
-    9: 'grid-cols-9',
-    10: 'grid-cols-10',
-    11: 'grid-cols-11',
-    12: 'grid-cols-12',
-    24: 'grid-cols-24',
+const gridItemSpan = computed(() => {
+  const spanMap: Record<number, string> = {
+    1: 'col-span-1',
+    2: 'col-span-2',
+    3: 'col-span-3',
+    4: 'col-span-4',
+    6: 'col-span-6',
+    8: 'col-span-8',
+    12: 'col-span-12',
+    24: 'col-span-24',
   }
 
-  return colsMap[props.cols]
+  return (itemSpan?: number) => spanMap[itemSpan ?? props.colSpan]
 })
-const handleValidate = (prop: FormItemProp) => {
-  console.log('222', prop, props.formData)
-}
 </script>
 
 <style lang="scss" scoped>

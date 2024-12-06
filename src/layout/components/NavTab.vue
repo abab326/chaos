@@ -1,17 +1,15 @@
 <template>
-  <div class="nav-container">
-    <el-tabs v-model="active" type="border-card" tab-position="top" stretch>
-      <el-tab-pane
-        v-for="item in panes"
-        :key="item.key"
-        :label="item.label"
-        :name="item.key"
-        closable
-        @tab-change="onTabChange"
-      >
-      </el-tab-pane>
-    </el-tabs>
-  </div>
+  <el-tabs v-model="active" tab-position="top" stretch>
+    <el-tab-pane
+      v-for="item in panes"
+      :key="item.key"
+      :label="item.label"
+      :name="item.key"
+      closable
+      @tab-change="onTabChange"
+    >
+    </el-tab-pane>
+  </el-tabs>
 </template>
 
 <script setup lang="ts">
@@ -55,6 +53,14 @@ const panes = reactive([
     key: '9',
     label: 'TabTabTabTab 9',
   },
+  {
+    key: '12',
+    label: 'TabTabTabTab 9',
+  },
+  {
+    key: '13',
+    label: 'TabTabTabTab 9',
+  },
 ])
 /**
  * 当Tab标签切换时更新活动Tab的名称
@@ -67,24 +73,4 @@ const onTabChange = (name: TabPaneName) => {
 }
 </script>
 
-<style lang="scss" scoped>
-.nav-container {
-  :deep(.el-tabs--border-card) {
-    border: none;
-    .el-tabs__header {
-      --el-tabs-header-height: 36px;
-      --el-fill-color-light: #fafafa;
-      .el-tabs__nav-next,
-      .el-tabs__nav-prev {
-        line-height: var(--el-tabs-header-height);
-      }
-    }
-    .el-tabs__content {
-      padding: 0;
-    }
-    .el-tabs__item {
-      border-radius: 4px;
-    }
-  }
-}
-</style>
+<style lang="scss" scoped></style>

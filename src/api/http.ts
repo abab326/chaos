@@ -35,11 +35,11 @@ class Http {
         }
         return config
       },
-      (err) => Promise.reject(err)
+      (error) => Promise.reject(error)
     )
     this.instance.interceptors.response.use(
       (response: AxiosResponse<Result<any>>) => {
-        console.log('interceptors response', response)
+        console.log('interceptors response success', response)
         if (response.status !== 200) {
           return Promise.reject(response.data)
         } else if (response.data.code !== 200) {
@@ -48,8 +48,9 @@ class Http {
         }
         return response
       },
-      (err) => {
-        const axiosError = err as AxiosError<Result<any>>
+      (error) => {
+        console.log('interceptors response error', error)
+        const axiosError = error as AxiosError<Result<any>>
         let result: Result<any>
         if (axiosError.response?.data) {
           result = axiosError.response.data
@@ -61,7 +62,7 @@ class Http {
           } as Result<any>
         }
         this.handleRequestError(result)
-        return Promise.reject(err)
+        return Promise.reject(error)
       }
     )
   }

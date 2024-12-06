@@ -14,6 +14,7 @@ export type FormItemComponentType =
 export interface CusFormItemProps {
   prop: string
   label: string
+  span?: 1 | 2 | 3 | 4 | 6 | 8 | 12 | 24
   type: FormItemComponentType
   rules?: any
   componentProps?: Record<string, any>
@@ -24,7 +25,7 @@ export interface CusFormItemProps {
 
 export interface CusFormProps {
   // 列数
-  cols?: number
+  colSpan?: number
   // 列属性
   colProps?: CusFormItemProps[]
   // 表单数据
