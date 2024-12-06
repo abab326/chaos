@@ -49,7 +49,7 @@ const {
   changePageSize,
   changeTotal,
 } = usePagination()
-const data = ref([1, 2, 3, 4, 5, 6, 7, 8, 9])
+const data = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
 const tableHeight = computed(() => {
   return height.value - 40
